@@ -19,7 +19,6 @@ RUN sudo rm -rf /etc/localtime && sudo ln -s /usr/share/zoneinfo/Asia/Kolkata /e
 #  && visualStudioCodeInsidersInstallationFile=visualStudioCodeInsiders.deb \
 #  && wget --output-document=$visualStudioCodeInsidersInstallationFile "https://code.visualstudio.com/sha/download?build=insider&os=linux-deb-x64" \
 RUN brew install pup \
- && sudo add-apt-repository -y ppa:persepolis/ppa \
  && wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add - \
  && sudo add-apt-repository -y "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" \
  && curl https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
@@ -37,7 +36,6 @@ RUN brew install pup \
      rclone-browser \
      firefox \
      qbittorrent \
-     persepolis \
      p7zip-full \
      software-properties-common \
      apt-transport-https \
