@@ -22,8 +22,6 @@ RUN sudo add-apt-repository -y ppa:persepolis/ppa \
  && wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add - \
  && sudo add-apt-repository -y "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" \
  && curl https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
- && echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list > /dev/null \
- && curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg \
  && VERSION_ID=$(sudo grep -oP 'VERSION_ID="\K[^"]+' /etc/os-release) \
  && wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb \
 #  && peaZipInstallationFile=PeaZip.deb \
@@ -42,7 +40,6 @@ RUN sudo add-apt-repository -y ppa:persepolis/ppa \
      apt-transport-https \
      wget \
      squid \
-     postgresql-16 \
      dotnet-sdk-7.0 \
      ./packages-microsoft-prod.deb \
      kdiff3 \
@@ -178,11 +175,6 @@ RUN bash -c ". /home/gitpod/.sdkman/bin/sdkman-init.sh && sdk update && sdk upgr
 # Setup PostgreSQL server for user gitpod
 ENV PATH=$PATH:/usr/lib/postgresql/16/bin
 ENV PGDATA=/home/gitpod/.pg_ctl/data
-RUN mkdir -p ~/.pg_ctl/bin ~/.pg_ctl/data ~/.pg_ctl/sockets \
- && initdb -D ~/.pg_ctl/data/ \
- && printf "#!/bin/bash\npg_ctl -D ~/.pg_ctl/data/ -l ~/.pg_ctl/log -o \"-k ~/.pg_ctl/sockets\" start\n" > ~/.pg_ctl/bin/pg_start \
- && printf "#!/bin/bash\npg_ctl -D ~/.pg_ctl/data/ -l ~/.pg_ctl/log -o \"-k ~/.pg_ctl/sockets\" stop\n" > ~/.pg_ctl/bin/pg_stop \
- && chmod +x ~/.pg_ctl/bin/*
 ENV PATH=$PATH:$HOME/.pg_ctl/bin
 ENV DATABASE_URL="postgresql://gitpod@localhost"
 
