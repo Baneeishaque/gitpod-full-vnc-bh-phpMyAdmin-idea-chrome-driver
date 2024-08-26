@@ -18,8 +18,6 @@ RUN sudo add-apt-repository -y ppa:persepolis/ppa \
  && sudo add-apt-repository -y "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" \
  && echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list > /dev/null \
  && curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg \
-#  && peaZipInstallationFile=PeaZip.deb \
-#  && wget --output-document=$peaZipInstallationFile $(curl -s https://api.github.com/repos/peazip/peaZip/releases/latest | sed 's/[()",{}]/ /g; s/ /\n/g' | grep "https.*releases/download.*GTK.*deb") \
  && sudo apt update \
  && sudo apt install -y \
      rclone-browser \
@@ -32,12 +30,10 @@ RUN sudo add-apt-repository -y ppa:persepolis/ppa \
      dotnet-sdk-7.0 \
      kdiff3 \
     #  microsoft-edge-dev \
-    #  ./$peaZipInstallationFile \
 #  && sudo apt install -y --force-yes \
 #      ./$visualStudioCodeInsidersInstallationFile \
  && sudo rm -rf /var/lib/apt/lists/*
-#  && rm $visualStudioCodeInsidersInstallationFile \
-#  && rm $peaZipInstallationFile
+#  && rm $visualStudioCodeInsidersInstallationFile
  
 # ARG chromeDriverDownloadUrl=https://chromedriver.storage.googleapis.com/111.0.5563.64/chromedriver_linux64.zip
 # RUN wget ${chromeDriverDownloadUrl} \
