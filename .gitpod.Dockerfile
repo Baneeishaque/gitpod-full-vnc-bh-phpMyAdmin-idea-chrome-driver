@@ -14,8 +14,6 @@ RUN sudo rm -rf /etc/localtime && sudo ln -s /usr/share/zoneinfo/Asia/Kolkata /e
 # ARG keyExplorerDownloadUrl="https://github.com/kaikramer/keystore-explorer/releases/download/v5.5.1/kse_5.5.1_all.deb"
 # RUN wget ${keyExplorerDownloadUrl} \
 #  && keyExplorerInstallationFile=$(basename ${keyExplorerDownloadUrl}) \
-#  && visualStudioCodeInsidersInstallationFile=visualStudioCodeInsiders.deb \
-#  && wget --output-document=$visualStudioCodeInsidersInstallationFile "https://code.visualstudio.com/sha/download?build=insider&os=linux-deb-x64" \
 RUN sudo add-apt-repository -y ppa:persepolis/ppa \
  && wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add - \
  && sudo add-apt-repository -y "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" \
@@ -42,11 +40,8 @@ RUN sudo add-apt-repository -y ppa:persepolis/ppa \
      kdiff3 \
     #  microsoft-edge-dev \
     #  ./$peaZipInstallationFile \
-#  && sudo apt install -y --force-yes \
-#      ./$visualStudioCodeInsidersInstallationFile \
  && sudo rm -rf /var/lib/apt/lists/*
 #  && rm $keyExplorerInstallationFile \
-#  && rm $visualStudioCodeInsidersInstallationFile \
 #  && rm $peaZipInstallationFile
 
 # ARG chromeDriverDownloadUrl=https://chromedriver.storage.googleapis.com/111.0.5563.64/chromedriver_linux64.zip
