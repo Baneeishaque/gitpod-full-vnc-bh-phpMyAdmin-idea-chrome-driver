@@ -65,3 +65,5 @@ vscode:
     # - redhat.vscode-yaml
     - eamodio.gitlens
     - sleistner.vscode-fileutils
+    # - beaglefoot.awk-ide-vscode
+    - jq-syntax-highlighting.jq-syntax-highlighting
